@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Krishna Yadav — Java Developer</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a2e;
+    --accent: #c8a96e;
+    --accent2: #4a90d9;
+    --bg: #f8f5f0;
+    --card: #ffffff;
+    --muted: #6b7280;
+    --border: #e5e0d8;
+    --green: #22c55e;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    background: rgba(248,245,240,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 5%;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 64px;
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem; font-weight: 700;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    text-decoration: none; color: var(--muted);
+    font-size: 0.9rem; font-weight: 500;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--ink); }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 100px 5% 60px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, #f8f5f0 60%, #eee9e0 100%);
+    z-index: 0;
+  }
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image: 
+      linear-gradient(rgba(200,169,110,0.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(200,169,110,0.08) 1px, transparent 1px);
+    background-size: 40px 40px;
+    z-index: 0;
+  }
+  .hero-content { position: relative; z-index: 1; max-width: 700px; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--card); border: 1px solid var(--border);
+    padding: 6px 16px; border-radius: 100px;
+    font-size: 0.8rem; font-weight: 500; color: var(--muted);
+    margin-bottom: 2rem;
+    animation: fadeUp 0.6s ease both;
+  }
+  .badge-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--green);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%,100% { box-shadow: 0 0 0 0 rgba(34,197,94,0.4); }
+    50% { box-shadow: 0 0 0 6px rgba(34,197,94,0); }
+  }
+  h1.hero-name {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    font-weight: 700; line-height: 1.05;
+    color: var(--ink);
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+  h1.hero-name em { color: var(--accent); font-style: normal; }
+  .hero-title {
+    font-size: 1.15rem; color: var(--muted); font-weight: 400;
+    margin: 1rem 0 1.5rem;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+  .hero-desc {
+    font-size: 1.05rem; line-height: 1.7; color: #374151;
+    max-width: 580px;
+    animation: fadeUp 0.6s 0.3s ease both;
+  }
+  .hero-ctas {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+    margin-top: 2.5rem;
+    animation: fadeUp 0.6s 0.4s ease both;
+  }
+  .btn-primary {
+    background: var(--ink); color: #fff;
+    padding: 13px 28px; border-radius: 8px;
+    text-decoration: none; font-weight: 500; font-size: 0.95rem;
+    transition: background 0.2s, transform 0.15s;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-primary:hover { background: #2d2d4e; transform: translateY(-2px); }
+  .btn-outline {
+    border: 1.5px solid var(--ink); color: var(--ink);
+    padding: 13px 28px; border-radius: 8px;
+    text-decoration: none; font-weight: 500; font-size: 0.95rem;
+    transition: all 0.2s;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-outline:hover { background: var(--ink); color: #fff; transform: translateY(-2px); }
+  .hero-stats {
+    display: flex; gap: 2.5rem; margin-top: 3rem;
+    animation: fadeUp 0.6s 0.5s ease both;
+  }
+  .stat-item { }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem; font-weight: 700; color: var(--ink);
+    display: block;
+  }
+  .stat-label { font-size: 0.8rem; color: var(--muted); }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── SECTIONS ── */
+  section { padding: 80px 5%; }
+  .section-label {
+    font-size: 0.75rem; font-weight: 600; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    font-weight: 700; color: var(--ink);
+    margin-bottom: 0.75rem;
+  }
+  .section-sub { color: var(--muted); font-size: 1rem; max-width: 500px; margin-bottom: 3rem; }
+  .divider { width: 60px; height: 3px; background: var(--accent); border-radius: 2px; margin: 1rem 0 2.5rem; }
+
+  /* ── SKILLS ── */
+  #skills { background: var(--ink); }
+  #skills .section-title { color: #fff; }
+  #skills .section-label { color: var(--accent); }
+  #skills .section-sub { color: rgba(255,255,255,0.5); }
+  #skills .divider { background: var(--accent); }
+
+  .skills-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+  }
+  .skill-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px; padding: 1.75rem;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .skill-card:hover { transform: translateY(-4px); border-color: var(--accent); }
+  .skill-card-icon { font-size: 1.8rem; margin-bottom: 1rem; }
+  .skill-card h3 { color: #fff; font-size: 1rem; margin-bottom: 0.75rem; font-weight: 600; }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .skill-tag {
+    background: rgba(200,169,110,0.15); color: var(--accent);
+    border: 1px solid rgba(200,169,110,0.25);
+    padding: 3px 10px; border-radius: 100px; font-size: 0.78rem;
+  }
+
+  /* ── PROJECTS ── */
+  #projects { background: #fff; }
+  .projects-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.75rem;
+  }
+  .project-card {
+    border: 1px solid var(--border); border-radius: 14px;
+    overflow: hidden; transition: transform 0.2s, box-shadow 0.2s;
+    background: var(--card);
+  }
+  .project-card:hover { transform: translateY(-5px); box-shadow: 0 16px 40px rgba(0,0,0,0.1); }
+  .project-header {
+    padding: 1.75rem 1.75rem 1rem;
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem;
+  }
+  .project-icon { font-size: 2rem; }
+  .project-links { display: flex; gap: 0.5rem; }
+  .project-link {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-size: 0.8rem; font-weight: 500;
+    padding: 5px 12px; border-radius: 6px;
+    text-decoration: none; transition: all 0.2s;
+  }
+  .link-live {
+    background: var(--green); color: #fff;
+  }
+  .link-live:hover { background: #16a34a; }
+  .link-github {
+    border: 1px solid var(--border); color: var(--muted);
+  }
+  .link-github:hover { border-color: var(--ink); color: var(--ink); }
+  .project-body { padding: 1.25rem 1.75rem 1.75rem; }
+  .project-body h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem;
+  }
+  .project-body p { font-size: 0.9rem; color: var(--muted); line-height: 1.6; margin-bottom: 1rem; }
+  .project-stack { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .stack-chip {
+    background: #f3f4f6; color: #374151;
+    padding: 3px 10px; border-radius: 6px; font-size: 0.78rem; font-weight: 500;
+  }
+  .live-badge {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-size: 0.72rem; color: var(--green); font-weight: 600;
+    background: rgba(34,197,94,0.1); padding: 2px 8px; border-radius: 100px;
+    margin-left: 8px;
+  }
+
+  /* ── EXPERIENCE / ACHIEVEMENTS ── */
+  #achievements { background: var(--bg); }
+  .achieve-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+  }
+  .achieve-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 1.5rem;
+    transition: transform 0.2s;
+  }
+  .achieve-card:hover { transform: translateY(-3px); }
+  .achieve-card .icon { font-size: 1.75rem; margin-bottom: 1rem; }
+  .achieve-card h3 { font-weight: 600; font-size: 0.95rem; margin-bottom: 0.4rem; }
+  .achieve-card p { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
+
+  /* ── EDUCATION ── */
+  #education { background: #fff; }
+  .edu-timeline { max-width: 700px; }
+  .edu-item {
+    display: flex; gap: 1.5rem;
+    padding-bottom: 2rem; position: relative;
+  }
+  .edu-item::before {
+    content: ''; position: absolute;
+    left: 19px; top: 40px; bottom: 0;
+    width: 1px; background: var(--border);
+  }
+  .edu-item:last-child::before { display: none; }
+  .edu-dot {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: var(--ink); color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem; flex-shrink: 0;
+  }
+  .edu-content h3 { font-weight: 600; font-size: 1rem; }
+  .edu-content .school { color: var(--muted); font-size: 0.88rem; margin: 0.2rem 0; }
+  .edu-content .edu-meta {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+    margin-top: 0.5rem;
+  }
+  .edu-year, .edu-score {
+    font-size: 0.82rem; font-weight: 500;
+    background: #f3f4f6; color: #374151;
+    padding: 2px 10px; border-radius: 6px;
+  }
+  .edu-score { background: rgba(200,169,110,0.12); color: #92400e; }
+
+  /* ── CONTACT ── */
+  #contact { background: var(--ink); }
+  #contact .section-title { color: #fff; }
+  #contact .section-label { color: var(--accent); }
+  #contact .section-sub { color: rgba(255,255,255,0.5); }
+  #contact .divider { background: var(--accent); }
+
+  .contact-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 4rem; }
+  .contact-info h3 { color: #fff; font-weight: 600; margin-bottom: 1rem; font-size: 1.1rem; }
+  .contact-links { display: flex; flex-direction: column; gap: 1rem; }
+  .contact-link {
+    display: flex; align-items: center; gap: 12px;
+    color: rgba(255,255,255,0.7); text-decoration: none;
+    font-size: 0.9rem; transition: color 0.2s;
+  }
+  .contact-link:hover { color: var(--accent); }
+  .contact-link-icon {
+    width: 36px; height: 36px; border-radius: 8px;
+    background: rgba(255,255,255,0.05);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem;
+  }
+
+  /* FORM */
+  .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+  .form-group label { font-size: 0.82rem; color: rgba(255,255,255,0.5); font-weight: 500; }
+  .form-group input, .form-group textarea {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 8px; padding: 12px 14px;
+    color: #fff; font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem; outline: none;
+    transition: border-color 0.2s;
+    width: 100%;
+  }
+  .form-group input:focus, .form-group textarea:focus {
+    border-color: var(--accent);
+  }
+  .form-group input::placeholder, .form-group textarea::placeholder {
+    color: rgba(255,255,255,0.25);
+  }
+  textarea { resize: vertical; min-height: 110px; }
+  .btn-send {
+    background: var(--accent); color: var(--ink);
+    border: none; padding: 13px 28px; border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem; font-weight: 600;
+    cursor: pointer; transition: all 0.2s;
+    align-self: flex-start;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .btn-send:hover { background: #d4b67a; transform: translateY(-2px); }
+  .btn-send:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+  .form-status {
+    padding: 10px 14px; border-radius: 8px;
+    font-size: 0.88rem; font-weight: 500;
+    display: none;
+  }
+  .form-status.success {
+    background: rgba(34,197,94,0.15);
+    border: 1px solid rgba(34,197,94,0.3);
+    color: #86efac; display: block;
+  }
+  .form-status.error {
+    background: rgba(239,68,68,0.15);
+    border: 1px solid rgba(239,68,68,0.3);
+    color: #fca5a5; display: block;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #0f0f1a; color: rgba(255,255,255,0.35);
+    text-align: center; padding: 1.5rem;
+    font-size: 0.82rem;
+  }
+  footer a { color: var(--accent); text-decoration: none; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .form-row { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+    .hero-stats { gap: 1.5rem; }
+  }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.5s, transform 0.5s; }
+  .reveal.visible { opacity: 1; transform: none; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#hero">KY<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#achievements">Achievements</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span class="badge-dot"></span>
+      Open to Java Developer Opportunities · Mumbai
+    </div>
+    <h1 class="hero-name">Krishna<br><em>Yadav</em></h1>
+    <p class="hero-title">Java Backend Developer · Spring Boot · Microservices</p>
+    <p class="hero-desc">
+      B.Sc. IT student at University of Mumbai building production-grade Java applications. 
+      Experienced with Spring Boot REST APIs, Microservices, MySQL, and Docker. 
+      Passionate about writing clean, scalable backend code.
+    </p>
+    <div class="hero-ctas">
+      <a href="#projects" class="btn-primary">🚀 View Projects</a>
+      <a href="#contact" class="btn-outline">📬 Hire Me</a>
+      <a href="https://github.com/krishna7275" target="_blank" class="btn-outline">GitHub</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <span class="stat-num">2+</span>
+        <span class="stat-label">Live Projects</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">50+</span>
+        <span class="stat-label">DSA Problems</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">8.0</span>
+        <span class="stat-label">CGPA</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label reveal">Technical Skills</div>
+  <div class="section-title reveal">What I Work With</div>
+  <div class="divider reveal"></div>
+  <div class="skills-grid">
+    <div class="skill-card reveal">
+      <div class="skill-card-icon">☕</div>
+      <h3>Backend Development</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">Java</span>
+        <span class="skill-tag">Spring Boot</span>
+        <span class="skill-tag">REST APIs</span>
+        <span class="skill-tag">Microservices</span>
+        <span class="skill-tag">Spring Security</span>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-card-icon">🗄️</div>
+      <h3>Database & ORM</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">MySQL</span>
+        <span class="skill-tag">Hibernate/JPA</span>
+        <span class="skill-tag">HQL</span>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-card-icon">⚛️</div>
+      <h3>Frontend</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">React.js</span>
+        <span class="skill-tag">JavaScript</span>
+        <span class="skill-tag">HTML5</span>
+        <span class="skill-tag">CSS3</span>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-card-icon">🛠️</div>
+      <h3>Tools & DevOps</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">Git</span>
+        <span class="skill-tag">Maven</span>
+        <span class="skill-tag">Docker</span>
+        <span class="skill-tag">Postman</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label reveal">Portfolio</div>
+  <div class="section-title reveal">Featured Projects</div>
+  <p class="section-sub reveal">Real-world applications built with production-grade architecture</p>
+  <div class="divider reveal"></div>
+  <div class="projects-grid">
+
+    <!-- PharmaEase -->
+    <div class="project-card reveal">
+      <div class="project-header">
+        <div class="project-icon">💊</div>
+        <div class="project-links">
+          <a href="https://pharmaease-e1ha.onrender.com/" target="_blank" class="project-link link-live">🔗 Live Demo</a>
+          <a href="https://github.com/krishna7275" target="_blank" class="project-link link-github">GitHub</a>
+        </div>
+      </div>
+      <div class="project-body">
+        <h3>PharmaEase <span class="live-badge">● LIVE</span></h3>
+        <p>Pharmacy Management System with role-based access, inventory tracking, prescription management, and automated stock alerts using Spring Boot monolithic architecture.</p>
+        <div class="project-stack">
+          <span class="stack-chip">Java</span>
+          <span class="stack-chip">Spring Boot</span>
+          <span class="stack-chip">MySQL</span>
+          <span class="stack-chip">Hibernate</span>
+          <span class="stack-chip">Spring Security</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- EduTrack -->
+    <div class="project-card reveal">
+      <div class="project-header">
+        <div class="project-icon">🎓</div>
+        <div class="project-links">
+          <a href="https://edutrack-4vmn.onrender.com/login" target="_blank" class="project-link link-live">🔗 Live Demo</a>
+          <a href="https://github.com/krishna7275" target="_blank" class="project-link link-github">GitHub</a>
+        </div>
+      </div>
+      <div class="project-body">
+        <h3>EduTrack <span class="live-badge">● LIVE</span></h3>
+        <p>Student Management System for institutes to manage student records, course details, and enrollments. Features secure login, dashboard, and full CRUD workflows — deployed on Render with cloud PostgreSQL (Neon) and Docker containerization.</p>
+        <div class="project-stack">
+          <span class="stack-chip">Java</span>
+          <span class="stack-chip">Spring Boot</span>
+          <span class="stack-chip">PostgreSQL</span>
+          <span class="stack-chip">Spring Security</span>
+          <span class="stack-chip">Docker</span>
+          <span class="stack-chip">Neon Cloud</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Food Expiry Tracker -->
+    <div class="project-card reveal">
+      <div class="project-header">
+        <div class="project-icon">🥦</div>
+        <div class="project-links">
+          <a href="https://github.com/krishna7275" target="_blank" class="project-link link-github">GitHub</a>
+        </div>
+      </div>
+      <div class="project-body">
+        <h3>Food Expiry Tracker</h3>
+        <p>Full-stack MERN app with barcode scanning & OCR-based product tracking, smart expiry notifications, and AI-powered recipe suggestions. Hackathon winner for sustainability innovation.</p>
+        <div class="project-stack">
+          <span class="stack-chip">React.js</span>
+          <span class="stack-chip">Node.js</span>
+          <span class="stack-chip">MongoDB</span>
+          <span class="stack-chip">OCR</span>
+          <span class="stack-chip">Express.js</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+<section id="achievements">
+  <div class="section-label reveal">Recognition</div>
+  <div class="section-title reveal">Achievements & Certifications</div>
+  <div class="divider reveal"></div>
+  <div class="achieve-grid">
+    <div class="achieve-card reveal">
+      <div class="icon">🏆</div>
+      <h3>Hackathon Recognition</h3>
+      <p>Food Expiry Tracker recognized for innovation in sustainability at college-level hackathon.</p>
+    </div>
+    <div class="achieve-card reveal">
+      <div class="icon">🥇</div>
+      <h3>1st Place — Java Competition</h3>
+      <p>Secured 1st position in College-level Java Programming Competition.</p>
+    </div>
+    <div class="achieve-card reveal">
+      <div class="icon">💻</div>
+      <h3>50+ DSA Problems</h3>
+      <p>Solved 50+ coding problems on LeetCode and GeeksforGeeks platforms.</p>
+    </div>
+    <div class="achieve-card reveal">
+      <div class="icon">🎖️</div>
+      <h3>Java — HackerRank</h3>
+      <p>Certified Java programmer on HackerRank. <a href="https://www.hackerrank.com/certificates/iframe/b1c6088d4a66" target="_blank" style="color:var(--accent);font-weight:600;">View Certificate ↗</a></p>
+    </div>
+    <div class="achieve-card reveal">
+      <div class="icon">🗃️</div>
+      <h3>SQL — HackerRank</h3>
+      <p>SQL certification from HackerRank, demonstrating database query expertise. <a href="https://www.hackerrank.com/certificates/iframe/f034b2c708f1" target="_blank" style="color:var(--accent);font-weight:600;">View Certificate ↗</a></p>
+    </div>
+    <div class="achieve-card reveal">
+      <div class="icon">🤝</div>
+      <h3>NSS Team Leader</h3>
+      <p>Led team of 5 volunteers in community service, organized 7-day digital literacy camp with 50+ participants.</p>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-label reveal">Academic Background</div>
+  <div class="section-title reveal">Education</div>
+  <div class="divider reveal"></div>
+  <div class="edu-timeline">
+    <div class="edu-item reveal">
+      <div class="edu-dot">🎓</div>
+      <div class="edu-content">
+        <h3>B.Sc. Information Technology</h3>
+        <p class="school">University of Mumbai — B.N. Bandodkar College of Science</p>
+        <div class="edu-meta">
+          <span class="edu-year">2023 – 2026</span>
+          <span class="edu-score">CGPA: 8.0</span>
+        </div>
+      </div>
+    </div>
+    <div class="edu-item reveal">
+      <div class="edu-dot">📚</div>
+      <div class="edu-content">
+        <h3>HSC — Science (XII)</h3>
+        <p class="school">G.V.M College of Science</p>
+        <div class="edu-meta">
+          <span class="edu-year">2023</span>
+          <span class="edu-score">60%</span>
+        </div>
+      </div>
+    </div>
+    <div class="edu-item reveal">
+      <div class="edu-dot">📖</div>
+      <div class="edu-content">
+        <h3>SSC (X)</h3>
+        <p class="school">G.V.M School</p>
+        <div class="edu-meta">
+          <span class="edu-year">2021</span>
+          <span class="edu-score">68%</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label reveal">Get In Touch</div>
+  <div class="section-title reveal">Contact Me</div>
+  <p class="section-sub reveal">Open to fresher opportunities, internships, and collaborations in Mumbai/Navi Mumbai/Thane</p>
+  <div class="divider reveal"></div>
+  <div class="contact-grid">
+    <div class="contact-info reveal">
+      <h3>Let's Connect</h3>
+      <div class="contact-links">
+        <a href="mailto:kpy.yt9833067464@gmail.com" class="contact-link">
+          <span class="contact-link-icon">📧</span>
+          kpy.yt9833067464@gmail.com
+        </a>
+        <a href="tel:+917275384881" class="contact-link">
+          <span class="contact-link-icon">📱</span>
+          +91 7275384881
+        </a>
+        <a href="https://linkedin.com/in/krishna7275" target="_blank" class="contact-link">
+          <span class="contact-link-icon">💼</span>
+          linkedin.com/in/krishna7275
+        </a>
+        <a href="https://github.com/krishna7275" target="_blank" class="contact-link">
+          <span class="contact-link-icon">💻</span>
+          github.com/krishna7275
+        </a>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <!-- FormSubmit — free service, delivers to your email, no backend needed -->
+      <form class="contact-form" id="contactForm" 
+            action="https://formsubmit.co/kpy.yt9833067464@gmail.com" 
+            method="POST">
+        <!-- FormSubmit config -->
+        <input type="hidden" name="_subject" value="New Portfolio Message — Krishna Yadav">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_template" value="table">
+        <input type="text" name="_honey" style="display:none">
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Your Name *</label>
+            <input type="text" name="name" placeholder="Name" required>
+          </div>
+          <div class="form-group">
+            <label>Email *</label>
+            <input type="email" name="email" placeholder="xyz@gmail.com" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Message *</label>
+          <textarea name="message" placeholder="Tell me about the opportunity..." required></textarea>
+        </div>
+        <div class="form-status" id="formStatus"></div>
+        <button type="submit" class="btn-send" id="sendBtn">
+          📬 Send Message
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Designed & built by <a href="#hero">Krishna Yadav</a> · Mumbai, Maharashtra · 2026</p>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 60);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Form feedback (FormSubmit handles submission, this just shows loading)
+  document.getElementById('contactForm').addEventListener('submit', function() {
+    const btn = document.getElementById('sendBtn');
+    btn.disabled = true;
+    btn.textContent = '⏳ Sending...';
+  });
+</script>
+</body>
+</html>
