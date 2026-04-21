@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Krishna Yadav — Java Developer</title>
+<title>Krishna Yadav — Full Stack Developer</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -18,9 +18,7 @@
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
   html { scroll-behavior: smooth; }
-
   body {
     font-family: 'DM Sans', sans-serif;
     background: var(--bg);
@@ -41,15 +39,13 @@
   .nav-logo {
     font-family: 'Playfair Display', serif;
     font-size: 1.3rem; font-weight: 700;
-    color: var(--ink);
-    text-decoration: none;
+    color: var(--ink); text-decoration: none;
   }
   .nav-logo span { color: var(--accent); }
   .nav-links { display: flex; gap: 2rem; list-style: none; }
   .nav-links a {
     text-decoration: none; color: var(--muted);
-    font-size: 0.9rem; font-weight: 500;
-    transition: color 0.2s;
+    font-size: 0.9rem; font-weight: 500; transition: color 0.2s;
   }
   .nav-links a:hover { color: var(--ink); }
 
@@ -58,8 +54,7 @@
     min-height: 100vh;
     display: flex; align-items: center;
     padding: 100px 5% 60px;
-    position: relative;
-    overflow: hidden;
+    position: relative; overflow: hidden;
   }
   .hero-bg {
     position: absolute; inset: 0;
@@ -75,41 +70,76 @@
     z-index: 0;
   }
   .hero-content { position: relative; z-index: 1; max-width: 700px; }
-  .hero-badge {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: var(--card); border: 1px solid var(--border);
-    padding: 6px 16px; border-radius: 100px;
-    font-size: 0.8rem; font-weight: 500; color: var(--muted);
+
+  /* Availability pill — redesigned, no highlight needed */
+  .availability-pill {
+    display: inline-flex; align-items: center; gap: 10px;
     margin-bottom: 2rem;
     animation: fadeUp 0.6s ease both;
   }
-  .badge-dot {
-    width: 8px; height: 8px; border-radius: 50%;
+  .avail-dot {
+    width: 9px; height: 9px; border-radius: 50%;
     background: var(--green);
+    box-shadow: 0 0 0 3px rgba(34,197,94,0.2);
     animation: pulse 2s infinite;
+    flex-shrink: 0;
   }
   @keyframes pulse {
-    0%,100% { box-shadow: 0 0 0 0 rgba(34,197,94,0.4); }
-    50% { box-shadow: 0 0 0 6px rgba(34,197,94,0); }
+    0%,100% { box-shadow: 0 0 0 3px rgba(34,197,94,0.2); }
+    50% { box-shadow: 0 0 0 7px rgba(34,197,94,0); }
   }
+  .avail-text {
+    font-size: 0.82rem; font-weight: 600; letter-spacing: 0.06em;
+    text-transform: uppercase; color: var(--muted);
+  }
+  .avail-location {
+    font-size: 0.82rem; font-weight: 500; color: var(--accent);
+    background: rgba(200,169,110,0.12);
+    padding: 3px 10px; border-radius: 100px;
+    border: 1px solid rgba(200,169,110,0.3);
+  }
+
   h1.hero-name {
     font-family: 'Playfair Display', serif;
     font-size: clamp(3rem, 6vw, 5.5rem);
-    font-weight: 700; line-height: 1.05;
-    color: var(--ink);
+    font-weight: 700; line-height: 1.05; color: var(--ink);
     animation: fadeUp 0.6s 0.1s ease both;
   }
   h1.hero-name em { color: var(--accent); font-style: normal; }
+
   .hero-title {
     font-size: 1.15rem; color: var(--muted); font-weight: 400;
-    margin: 1rem 0 1.5rem;
+    margin: 1rem 0 0;
     animation: fadeUp 0.6s 0.2s ease both;
   }
-  .hero-desc {
-    font-size: 1.05rem; line-height: 1.7; color: #374151;
-    max-width: 580px;
+
+  /* Tagline chips row */
+  .hero-chips {
+    display: flex; flex-wrap: wrap; gap: 0.5rem;
+    margin: 1.5rem 0 0;
     animation: fadeUp 0.6s 0.3s ease both;
   }
+  .hero-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 6px 14px; border-radius: 8px;
+    font-size: 0.85rem; font-weight: 500;
+    border: 1.5px solid var(--border);
+    background: var(--card); color: var(--ink);
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .hero-chip:hover { border-color: var(--accent); color: var(--accent); }
+  .hero-chip-icon { font-size: 1rem; }
+
+  /* One-liner punch */
+  .hero-punch {
+    margin-top: 1.75rem;
+    font-size: 1.05rem; line-height: 1.75; color: #374151;
+    max-width: 540px;
+    animation: fadeUp 0.6s 0.35s ease both;
+    padding-left: 14px;
+    border-left: 3px solid var(--accent);
+  }
+
   .hero-ctas {
     display: flex; gap: 1rem; flex-wrap: wrap;
     margin-top: 2.5rem;
@@ -131,11 +161,11 @@
     display: inline-flex; align-items: center; gap: 8px;
   }
   .btn-outline:hover { background: var(--ink); color: #fff; transform: translateY(-2px); }
+
   .hero-stats {
     display: flex; gap: 2.5rem; margin-top: 3rem;
     animation: fadeUp 0.6s 0.5s ease both;
   }
-  .stat-item { }
   .stat-num {
     font-family: 'Playfair Display', serif;
     font-size: 2rem; font-weight: 700; color: var(--ink);
@@ -216,13 +246,9 @@
     padding: 5px 12px; border-radius: 6px;
     text-decoration: none; transition: all 0.2s;
   }
-  .link-live {
-    background: var(--green); color: #fff;
-  }
+  .link-live { background: var(--green); color: #fff; }
   .link-live:hover { background: #16a34a; }
-  .link-github {
-    border: 1px solid var(--border); color: var(--muted);
-  }
+  .link-github { border: 1px solid var(--border); color: var(--muted); }
   .link-github:hover { border-color: var(--ink); color: var(--ink); }
   .project-body { padding: 1.25rem 1.75rem 1.75rem; }
   .project-body h3 {
@@ -242,7 +268,7 @@
     margin-left: 8px;
   }
 
-  /* ── EXPERIENCE / ACHIEVEMENTS ── */
+  /* ── ACHIEVEMENTS ── */
   #achievements { background: var(--bg); }
   .achieve-grid {
     display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -279,10 +305,7 @@
   }
   .edu-content h3 { font-weight: 600; font-size: 1rem; }
   .edu-content .school { color: var(--muted); font-size: 0.88rem; margin: 0.2rem 0; }
-  .edu-content .edu-meta {
-    display: flex; gap: 1rem; flex-wrap: wrap;
-    margin-top: 0.5rem;
-  }
+  .edu-content .edu-meta { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 0.5rem; }
   .edu-year, .edu-score {
     font-size: 0.82rem; font-weight: 500;
     background: #f3f4f6; color: #374151;
@@ -313,7 +336,6 @@
     font-size: 1rem;
   }
 
-  /* FORM */
   .contact-form { display: flex; flex-direction: column; gap: 1rem; }
   .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
   .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
@@ -324,15 +346,10 @@
     border-radius: 8px; padding: 12px 14px;
     color: #fff; font-family: 'DM Sans', sans-serif;
     font-size: 0.9rem; outline: none;
-    transition: border-color 0.2s;
-    width: 100%;
+    transition: border-color 0.2s; width: 100%;
   }
-  .form-group input:focus, .form-group textarea:focus {
-    border-color: var(--accent);
-  }
-  .form-group input::placeholder, .form-group textarea::placeholder {
-    color: rgba(255,255,255,0.25);
-  }
+  .form-group input:focus, .form-group textarea:focus { border-color: var(--accent); }
+  .form-group input::placeholder, .form-group textarea::placeholder { color: rgba(255,255,255,0.25); }
   textarea { resize: vertical; min-height: 110px; }
   .btn-send {
     background: var(--accent); color: var(--ink);
@@ -345,22 +362,6 @@
   }
   .btn-send:hover { background: #d4b67a; transform: translateY(-2px); }
   .btn-send:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
-
-  .form-status {
-    padding: 10px 14px; border-radius: 8px;
-    font-size: 0.88rem; font-weight: 500;
-    display: none;
-  }
-  .form-status.success {
-    background: rgba(34,197,94,0.15);
-    border: 1px solid rgba(34,197,94,0.3);
-    color: #86efac; display: block;
-  }
-  .form-status.error {
-    background: rgba(239,68,68,0.15);
-    border: 1px solid rgba(239,68,68,0.3);
-    color: #fca5a5; display: block;
-  }
 
   /* ── FOOTER ── */
   footer {
@@ -402,22 +403,37 @@
   <div class="hero-bg"></div>
   <div class="hero-grid"></div>
   <div class="hero-content">
-    <div class="hero-badge">
-      <span class="badge-dot"></span>
-      Open to Java Developer Opportunities · Mumbai
+
+    <!-- Clean availability row — no card/pill box -->
+    <div class="availability-pill">
+      <span class="avail-dot"></span>
+      <span class="avail-text">Available for Opportunities</span>
+      <span class="avail-location">📍 Mumbai</span>
     </div>
+
     <h1 class="hero-name">Krishna<br><em>Yadav</em></h1>
-    <p class="hero-title">Java Backend Developer · Spring Boot · Microservices</p>
-    <p class="hero-desc">
-      B.Sc. IT student at University of Mumbai building production-grade Java applications. 
-      Experienced with Spring Boot REST APIs, Microservices, MySQL, and Docker. 
-      Passionate about writing clean, scalable backend code.
+    <p class="hero-title">Full Stack Developer</p>
+
+    <!-- Skill chips — visual & scannable -->
+    <div class="hero-chips">
+      <span class="hero-chip"><span class="hero-chip-icon">☕</span> Java &amp; Spring Boot</span>
+      <span class="hero-chip"><span class="hero-chip-icon">⚛️</span> React.js</span>
+      <span class="hero-chip"><span class="hero-chip-icon">🐳</span> Docker &amp; Microservices</span>
+      <span class="hero-chip"><span class="hero-chip-icon">🗄️</span> MySQL &amp; PostgreSQL</span>
+    </div>
+
+    <!-- One punchy line with accent border -->
+    <p class="hero-punch">
+      B.Sc. IT student building <strong>production-ready</strong> full-stack apps —
+      from robust Spring Boot backends to clean React frontends, deployed on the cloud.
     </p>
+
     <div class="hero-ctas">
       <a href="#projects" class="btn-primary">🚀 View Projects</a>
       <a href="#contact" class="btn-outline">📬 Hire Me</a>
       <a href="https://github.com/krishna7275" target="_blank" class="btn-outline">GitHub</a>
     </div>
+
     <div class="hero-stats">
       <div class="stat-item">
         <span class="stat-num">2+</span>
@@ -457,6 +473,7 @@
       <h3>Database & ORM</h3>
       <div class="skill-tags">
         <span class="skill-tag">MySQL</span>
+        <span class="skill-tag">PostgreSQL</span>
         <span class="skill-tag">Hibernate/JPA</span>
         <span class="skill-tag">HQL</span>
       </div>
@@ -492,7 +509,6 @@
   <div class="divider reveal"></div>
   <div class="projects-grid">
 
-    <!-- PharmaEase -->
     <div class="project-card reveal">
       <div class="project-header">
         <div class="project-icon">💊</div>
@@ -514,7 +530,6 @@
       </div>
     </div>
 
-    <!-- EduTrack -->
     <div class="project-card reveal">
       <div class="project-header">
         <div class="project-icon">🎓</div>
@@ -537,7 +552,6 @@
       </div>
     </div>
 
-    <!-- Food Expiry Tracker -->
     <div class="project-card reveal">
       <div class="project-header">
         <div class="project-icon">🥦</div>
@@ -672,16 +686,13 @@
     </div>
 
     <div class="reveal">
-      <!-- FormSubmit — free service, delivers to your email, no backend needed -->
-      <form class="contact-form" id="contactForm" 
-            action="https://formsubmit.co/kpy.yt9833067464@gmail.com" 
+      <form class="contact-form" id="contactForm"
+            action="https://formsubmit.co/kpy.yt9833067464@gmail.com"
             method="POST">
-        <!-- FormSubmit config -->
         <input type="hidden" name="_subject" value="New Portfolio Message — Krishna Yadav">
         <input type="hidden" name="_captcha" value="false">
         <input type="hidden" name="_template" value="table">
         <input type="text" name="_honey" style="display:none">
-
         <div class="form-row">
           <div class="form-group">
             <label>Your Name *</label>
@@ -696,7 +707,6 @@
           <label>Message *</label>
           <textarea name="message" placeholder="Tell me about the opportunity..." required></textarea>
         </div>
-        <div class="form-status" id="formStatus"></div>
         <button type="submit" class="btn-send" id="sendBtn">
           📬 Send Message
         </button>
@@ -710,7 +720,6 @@
 </footer>
 
 <script>
-  // Scroll reveal
   const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((e, i) => {
@@ -721,7 +730,6 @@
   }, { threshold: 0.1 });
   reveals.forEach(el => observer.observe(el));
 
-  // Form feedback (FormSubmit handles submission, this just shows loading)
   document.getElementById('contactForm').addEventListener('submit', function() {
     const btn = document.getElementById('sendBtn');
     btn.disabled = true;
